@@ -27,30 +27,30 @@ const App: React.FC = () => {
     toast.error('Illegal move');
   };
 
-  const handleReset = () => {
-    setMoves([]);
-    setTurn('white');
-    setCapturedPieces({ white: [], black: [] });
-    boardState.current = [];
-    toast.success('Game reset');
-  };
+  // const handleReset = () => {
+  //   setMoves([]);
+  //   setTurn('white');
+  //   setCapturedPieces({ white: [], black: [] });
+  //   boardState.current = [];
+  //   toast.success('Game reset');
+  // };
 
-  const handlePauseResume = () => {
-    setPaused(prev => !prev);
-    toast.success(paused ? 'Resumed' : 'Paused');
-  };
+  // const handlePauseResume = () => {
+  //   setPaused(prev => !prev);
+  //   toast.success(paused ? 'Resumed' : 'Paused');
+  // };
 
-  const handleUndo = () => {
-    if (boardState.current.length > 0) {
-      const { moves: previousMoves, turn: previousTurn, capturedPieces: previousCapturedPieces } = boardState.current.pop()!;
-      setMoves(previousMoves);
-      setTurn(previousTurn);
-      setCapturedPieces(previousCapturedPieces);
-      toast.success('Move undone');
-    } else {
-      toast.error('No moves to undo');
-    }
-  };
+  // const handleUndo = () => {
+  //   if (boardState.current.length > 0) {
+  //     const { moves: previousMoves, turn: previousTurn, capturedPieces: previousCapturedPieces } = boardState.current.pop()!;
+  //     setMoves(previousMoves);
+  //     setTurn(previousTurn);
+  //     setCapturedPieces(previousCapturedPieces);
+  //     toast.success('Move undone');
+  //   } else {
+  //     toast.error('No moves to undo');
+  //   }
+  // };
 
   return (
     <div className="flex mt-4 justify-center">
