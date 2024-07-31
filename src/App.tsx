@@ -5,14 +5,19 @@ import Timers from './components/Timers';
 import MoveList from './components/MoveList';
 import CapturedPieces from './components/CapturedPieces';
 
-const App = () => {
-  const [moves, setMoves] = useState([]);
-  const [turn, setTurn] = useState('white');
-  const [capturedPieces, setCapturedPieces] = useState({ white: [], black: [] });
-  const [paused, setPaused] = useState(false);
-  const boardState = useRef([]);
+interface CapturedPiecesState {
+  white: string[];
+  black: string[];
+}
 
-  const handleMove = (move) => {
+const App: React.FC = () => {
+  const [moves, setMoves] = useState<string[]>([]);
+  const [turn, setTurn] = useState<'white' | 'black'>('white');
+  const [capturedPieces, setCapturedPieces] = useState<CapturedPiecesState>({ white: [], black: [] });
+  const [paused, setPaused] = useState<boolean>(false);
+  const boardState = useRef<{ moves: string[], turn: 'white' | 'black', capturedPieces: CapturedPiecesState }[]>([]);
+
+  const handleMove = (move: string) => {
     boardState.current.push({ moves, turn, capturedPieces });
     setMoves([...moves, move]);
     setTurn(turn === 'white' ? 'black' : 'white');
@@ -31,13 +36,13 @@ const App = () => {
   };
 
   const handlePauseResume = () => {
-    setPaused(!paused);
+    setPaused(prev => !prev);
     toast.success(paused ? 'Resumed' : 'Paused');
   };
 
   const handleUndo = () => {
     if (boardState.current.length > 0) {
-      const { moves: previousMoves, turn: previousTurn, capturedPieces: previousCapturedPieces } = boardState.current.pop();
+      const { moves: previousMoves, turn: previousTurn, capturedPieces: previousCapturedPieces } = boardState.current.pop()!;
       setMoves(previousMoves);
       setTurn(previousTurn);
       setCapturedPieces(previousCapturedPieces);
@@ -51,7 +56,13 @@ const App = () => {
     <div className="flex mt-4 justify-center">
       <Toaster />
       <div className="flex-shrink-0">
-        <ChessBoard onMove={handleMove} onIllegalMove={handleIllegalMove} turn={turn} setCapturedPieces={setCapturedPieces} capturedPieces={capturedPieces} />
+        <ChessBoard
+          onMove={handleMove}
+          onIllegalMove={handleIllegalMove}
+          turn={turn}
+          setCapturedPieces={setCapturedPieces}
+          capturedPieces={capturedPieces}
+        />
       </div>
       <div className="flex-shrink-0 ml-4">
         <Timers turn={turn} paused={paused} />

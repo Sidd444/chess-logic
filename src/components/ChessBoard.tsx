@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { pieceIcons, initialBoardSetup, isValidMove, getPossibleMoves, isCheck, isCheckmate } from '../logic/chessLogic';
 import { toast } from 'react-hot-toast';
 
-const ChessBoard = ({ onMove, onIllegalMove, turn, setCapturedPieces, capturedPieces }) => {
-  const [board, setBoard] = useState(initialBoardSetup);
-  const [selectedPiece, setSelectedPiece] = useState(null);
-  const [highlightedSquares, setHighlightedSquares] = useState([]);
+interface ChessBoardProps {
+  onMove: (move: string) => void;
+  onIllegalMove: () => void;
+  turn: 'white' | 'black';
+  setCapturedPieces: (capturedPieces: { white: string[]; black: string[] }) => void;
+  capturedPieces: { white: string[]; black: string[] };
+}
 
-  const handleSquareClick = (row, col) => {
+const ChessBoard: React.FC<ChessBoardProps> = ({ onMove, onIllegalMove, turn, setCapturedPieces, capturedPieces }:ChessBoardProps) => {
+  const [board, setBoard] = useState<string[][]>(initialBoardSetup);
+  const [selectedPiece, setSelectedPiece] = useState<[number, number] | null>(null);
+  const [highlightedSquares, setHighlightedSquares] = useState<[number, number][]>([]);
+
+  const handleSquareClick = (row: number, col: number) => {
     if (selectedPiece) {
       const [fromRow, fromCol] = selectedPiece;
       const piece = board[fromRow][fromCol];
@@ -59,7 +67,15 @@ const ChessBoard = ({ onMove, onIllegalMove, turn, setCapturedPieces, capturedPi
         row.map((piece, colIndex) => (
           <div
             key={`${rowIndex}-${colIndex}`}
-            className={`w-16 h-16 flex items-center justify-center border ${selectedPiece && selectedPiece[0] === rowIndex && selectedPiece[1] === colIndex ? 'bg-yellow-300' : highlightedSquares.some(([r, c]) => r === rowIndex && c === colIndex) ? 'bg-green-300' : (rowIndex + colIndex) % 2 === 0 ? 'bg-gray-300' : 'bg-gray-500'}`}
+            className={`w-16 h-16 flex items-center justify-center border ${
+              selectedPiece && selectedPiece[0] === rowIndex && selectedPiece[1] === colIndex
+                ? 'bg-yellow-300'
+                : highlightedSquares.some(([r, c]) => r === rowIndex && c === colIndex)
+                ? 'bg-green-300'
+                : (rowIndex + colIndex) % 2 === 0
+                ? 'bg-gray-300'
+                : 'bg-gray-500'
+            }`}
             onClick={() => handleSquareClick(rowIndex, colIndex)}
           >
             {piece && pieceIcons[piece]}

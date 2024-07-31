@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const Timers = ({ turn, paused }) => {
-  const [whiteTime, setWhiteTime] = useState(300); // 5 minutes
-  const [blackTime, setBlackTime] = useState(300); // 5 minutes
+interface TimersProps {
+  turn: 'white' | 'black';
+  paused: boolean;
+}
+
+const Timers: React.FC<TimersProps> = ({ turn, paused }) => {
+  const [whiteTime, setWhiteTime] = useState<number>(300); 
+  const [blackTime, setBlackTime] = useState<number>(300); 
 
   useEffect(() => {
     if (turn === 'white') {
@@ -13,7 +18,7 @@ const Timers = ({ turn, paused }) => {
   }, [turn]);
 
   useEffect(() => {
-    let timer;
+    let timer: NodeJS.Timeout;
     if (!paused) {
       timer = setInterval(() => {
         if (turn === 'white') {
@@ -28,8 +33,14 @@ const Timers = ({ turn, paused }) => {
 
   return (
     <div>
-      <h3>White Time: {Math.floor(whiteTime / 60)}:{whiteTime % 60 < 10 ? `0${whiteTime % 60}` : whiteTime % 60}</h3>
-      <h3>Black Time: {Math.floor(blackTime / 60)}:{blackTime % 60 < 10 ? `0${blackTime % 60}` : blackTime % 60}</h3>
+      <h3>
+        White Time: {Math.floor(whiteTime / 60)}:
+        {whiteTime % 60 < 10 ? `0${whiteTime % 60}` : whiteTime % 60}
+      </h3>
+      <h3>
+        Black Time: {Math.floor(blackTime / 60)}:
+        {blackTime % 60 < 10 ? `0${blackTime % 60}` : blackTime % 60}
+      </h3>
     </div>
   );
 };

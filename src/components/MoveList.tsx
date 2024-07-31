@@ -1,6 +1,10 @@
 import React from 'react';
 
-const MoveList = ({ moves }) => {
+interface MoveListProps {
+  moves: string[];
+}
+
+const MoveList: React.FC<MoveListProps> = ({ moves }) => {
   return (
     <div className="mt-4">
       <h3 className="text-lg mb-2">Move List</h3>

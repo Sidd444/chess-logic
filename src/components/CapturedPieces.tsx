@@ -1,7 +1,14 @@
 import React from 'react';
 import { pieceIcons } from '../logic/chessLogic';
 
-const CapturedPieces = ({ capturedPieces }) => {
+interface CapturedPiecesProps {
+  capturedPieces: {
+    white: string[];
+    black: string[];
+  };
+}
+
+const CapturedPieces: React.FC<CapturedPiecesProps> = ({ capturedPieces }) => {
   return (
     <div className="mt-4">
       <h3 className="text-lg mb-2">Captured Pieces</h3>
