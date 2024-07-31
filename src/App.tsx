@@ -14,6 +14,7 @@ const App: React.FC = () => {
   const [moves, setMoves] = useState<string[]>([]);
   const [turn, setTurn] = useState<'white' | 'black'>('white');
   const [capturedPieces, setCapturedPieces] = useState<CapturedPiecesState>({ white: [], black: [] });
+  //@ts-ignore
   const [paused, setPaused] = useState<boolean>(false);
   const boardState = useRef<{ moves: string[], turn: 'white' | 'black', capturedPieces: CapturedPiecesState }[]>([]);
 
