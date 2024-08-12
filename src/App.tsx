@@ -61,6 +61,7 @@ const App: React.FC = () => {
           onMove={handleMove}
           onIllegalMove={handleIllegalMove}
           turn={turn}
+          setTurn={setTurn}
           setCapturedPieces={setCapturedPieces}
           capturedPieces={capturedPieces}
         />
