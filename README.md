@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# Chess Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Chess Game project! This is a fully functional offline chess game built using React, TypeScript, and Tailwind CSS. It includes features like move validation, timers, move history, and more.
 
-Currently, two official plugins are available:
+# [**Deployed Link**](https://chess-logic.vercel.app/) 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## Expanding the ESLint configuration
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **React Hot Toast**: A library for toast notifications.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- **Chess Logic**: Implements chess rules and piece movements from scratch.
+- **Move Validation**: Validates legal moves for each chess piece.
+- **Timers**: Tracks time for each player with countdown timers.
+- **Move History**: Keeps a list of all moves made during the game.
+- **Captured Pieces**: Displays pieces captured by each player.
+- **Check and Checkmate Detection**: Notifies players of check and checkmate situations.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
